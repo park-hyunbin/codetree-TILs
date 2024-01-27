@@ -10,4 +10,4 @@ hour += 1
 if hour == 24 : 
     hour = 0 
 # 출력
-print(f"{hour}:{minute:02d}")
+print(f"{hour}:{minute}")
