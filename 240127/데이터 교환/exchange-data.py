@@ -1,14 +1,10 @@
-a = 5
-b = 6
-c = 7
+# 변수 선언
+a, b, c = 5, 6, 7
 
-# 변수들을 교환
-temp = a
-a = c 
-c = b 
-b = temp
-
-# 결과 출력
+# 교체
+a, b, c = c, a, b
+	
+# 출력
 print(a)
 print(b)
 print(c)
