@@ -1,28 +1,24 @@
-emergency_count = 0
-
-for _ in range(3):
-    a, b = map(str, input().split())
-    b = int(b)
-
-    if a == 'Y' and b >= 37:
-        emergency_count += 1
-
 result_list = []
 
-if emergency_count >= 2:
-    result_list.append('E')
-else:
-    a, b = map(str, input().split())
+for _ in range(3) :
+    a,b = map(str,input().split())
     b = int(b)
 
-    if a == 'Y' and b >= 37:
-        result_list.append('A')
-    elif a == 'N' and b >= 37:
-        result_list.append('B')
-    elif a == 'Y' and b < 37:
-        result_list.append('C')
-    else:
-        result_list.append('D')
+    list = []
+    
 
-for result in result_list:
-    print(result)
+    if a == 'Y' and b >= 37 : 
+        list.append('A')
+    elif a == 'N' and b >= 37 :
+        list.append('B')
+    elif a == 'Y' and b <37 : 
+        list.append('C')
+    else : 
+        list.append('D')
+
+    result_list.extend(list)
+
+if result_list.count('A') >= 2:
+    print('E') 
+else : 
+    print('N')
