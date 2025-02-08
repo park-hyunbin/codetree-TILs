@@ -8,6 +8,7 @@ for i in range(2,n):
         satisfied = False 
     else : 
         satisfied = True
+        break
 
 if satisfied == False : 
     print("C")
