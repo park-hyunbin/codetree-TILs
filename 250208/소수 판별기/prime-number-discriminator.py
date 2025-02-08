@@ -1,17 +1,16 @@
 n = int(input())
 
 satisfied = False 
-
-for i in range(2,n):
-    if n == 2 : 
-        print("P")
-        break
-    elif n%i ==0 : 
-        break 
-        satisfied = False 
-    else : 
-        satisfied = True
-        break
+if n == 2 : 
+    print("P")
+else : 
+    for i in range(2,n):
+        if n%i ==0 : 
+            break 
+            satisfied = False 
+        else : 
+            satisfied = True
+        
 
 if satisfied == False : 
     print("C")
