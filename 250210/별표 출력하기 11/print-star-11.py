@@ -1,4 +1,11 @@
+
 n = int(input())
+
+if n == 1:
+    size = 3
+else:
+    size = n * 2 + 1
+
 
 for i in range(n * 2+1):  
     for j in range(n * 2+1):
