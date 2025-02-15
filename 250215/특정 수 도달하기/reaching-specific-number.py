@@ -9,4 +9,4 @@ for i in range(len(arr)):
     sum += arr[i]
     cnt += 1
 
-print(sum, sum / cnt)  
+print(sum, format(sum / cnt, ".1f")) 
