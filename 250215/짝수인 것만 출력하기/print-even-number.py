@@ -1,9 +1,11 @@
 n = int(input())
 arr = list(map(int,input().split()))
 
-sum = 0 
+sum = []
 
 for i in arr : 
     if i%2== 0 : 
-        sum += i 
-print(sum)
+        sum.append(i)
+
+for i in sum : 
+    print(i, end = ' ')
