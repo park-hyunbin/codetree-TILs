@@ -3,6 +3,7 @@ n = int(input())
 arr = []
 cnt = 0 
 cntt = 0 
+
 while True : 
     cntt += 1
     arr.append(cntt*n)
