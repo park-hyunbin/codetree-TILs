@@ -1,7 +1,6 @@
-str_list = []  
-for _ in range(2):
-    str_list.append(input())  
+str_1 = input().split()
 
-joina = "".join(str_list) 
-
-print(len(joina))
+if len(str_1[0])>len(str_1[1]):
+    print(str_1[0], len(str_1[0]))
+else : 
+    print(str_1[1],len(str_1[1]))
