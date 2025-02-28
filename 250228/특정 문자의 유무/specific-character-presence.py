@@ -26,4 +26,4 @@ elif exists == True and exists1 == False :
 elif exists == False and exists1 == True : 
     print("No Yes")
 else : 
-    prit("No No")
+    print("No No")
