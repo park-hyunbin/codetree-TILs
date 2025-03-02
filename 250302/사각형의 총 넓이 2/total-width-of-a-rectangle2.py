@@ -1,19 +1,27 @@
-n = int(input())
+OFFSET = 100 
+MAX_R = 200
 
-MAX_SIZE = 101
+n = int(input())
+rects = [
+    tuple(map(int,input().split()))
+    for _ in range(n)
+]
 grid = [
-    [0] * MAX_SIZE 
-    for _ in range(MAX_SIZE)
+    [0] * (MAX_R+1) 
+    for _ in range(MAX_R+1)
 ]
 
-for _ in range(n):
-    x1, y1, x2, y2 = map(int, input().split())
+for x1,y1,x2,y2 in rects : 
+    x1, y1 = x1 +OFFSET, y1 +OFFSET
+    x2, y2 = x2 +OFFSET, y2 +OFFSET 
 
-    # 주어진 사각형 범위 내의 좌표를 1로 채움
-    for i in range(x1, x2):  
-        for j in range(y1, y2):  
-            grid[i][j] = 1  # 직사각형 부분 표시
+    for x in range(x1, x2):
+        for y in range(y1,y2):
+            grid[x][y] = 1
 
-area = sum(sum(row) for row in grid)
-
+area = 0 
+for x in range(0, MAX_R +1):
+    for y in range(0,MAX_R +1):
+        if grid[x][y]:
+            area += 1 
 print(area)
