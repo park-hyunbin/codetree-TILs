@@ -1,3 +1,3 @@
 arr = list(map(float,input().split()))
 
-print(sum(arr)/8)
+print(round(sum(arr)/8,1))
