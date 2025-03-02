@@ -1,40 +1,49 @@
-# Offset과 최대 크기 설정
 OFFSET = 1000
 MAX_R = 2000
 
-# 첫 번째 직사각형 입력
-x1, y1, x2, y2 = map(int, input().split())
-# 두 번째 직사각형 입력
-x3, y3, x4, y4 = map(int, input().split())
+# 변수 선언 및 입력
+n = 2
+rects = [
+    tuple(map(int, input().split()))
+    for _ in range(n)
+]
 
-# 좌표를 Offset 적용하여 음수 방지
-x1, y1, x2, y2 = x1 + OFFSET, y1 + OFFSET, x2 + OFFSET, y2 + OFFSET
-x3, y3, x4, y4 = x3 + OFFSET, y3 + OFFSET, x4 + OFFSET, y4 + OFFSET
+checked = [
+    [0] * (MAX_R + 1)
+    for _ in range(MAX_R + 1)
+]
 
-# 첫 번째 직사각형의 가로, 세로 길이
-width1 = x2 - x1
-height1 = y2 - y1
+for i, (x1, y1, x2, y2) in enumerate(rects, start=1):
+    # OFFSET을 더해줍니다.
+    x1, y1 = x1 + OFFSET, y1 + OFFSET
+    x2, y2 = x2 + OFFSET, y2 + OFFSET
+    
+    # 직사각형에 주어진 순으로 1, 2 번호를 붙여줍니다.
+    # 격자 단위로 진행하는 문제이므로
+    # x2, y2에 등호가 들어가지 않음에 유의합니다.
+    for x in range(x1, x2):
+        for y in range(y1, y2):
+            checked[x][y] = i
 
-# 겹치는 영역 계산
-overlap_x1 = max(x1, x3)
-overlap_y1 = max(y1, y3)
-overlap_x2 = min(x2, x4)
-overlap_y2 = min(y2, y4)
+# 1, 2 순으로 붙였는데도
+# 아직 숫자 1로 남아있는 곳들 중 최대 최소 x, y 값을 전부 계산합니다.
+min_x, max_x, min_y, max_y = MAX_R, 0, MAX_R, 0
+first_rect_exist = False
+for x in range(MAX_R + 1):
+    for y in range(MAX_R + 1):
+        if checked[x][y] == 1:
+            first_rect_exist = True
+            min_x = min(min_x, x)
+            max_x = max(max_x, x)
+            min_y = min(min_y, y)
+            max_y = max(max_y, y)
 
-# 겹치는 부분이 존재하는지 확인
-if overlap_x1 < overlap_x2 and overlap_y1 < overlap_y2:
-    overlap_width = overlap_x2 - overlap_x1
-    overlap_height = overlap_y2 - overlap_y1
+# 넓이를 계산합니다.
+# Case 1. 첫 번째 직사각형이 전혀 남아있지 않다면 넓이는 0입니다.
+if not first_rect_exist:
+    area = 0
+# Case 2. 첫 번째 직사각형이 남아있다면, 넓이를 계산합니다.
 else:
-    overlap_width = 0
-    overlap_height = 0
+    area = (max_x - min_x + 1) * (max_y - min_y + 1)
 
-# 첫 번째 직사각형이 완전히 덮이지 않았을 경우 필요한 최소 직사각형 찾기
-remaining_width = max(width1 - overlap_width, width1)  # 남은 가로 길이
-remaining_height = max(height1 - overlap_height, height1)  # 남은 세로 길이
-
-# 추가 직사각형의 최소 크기
-min_rectangle_area = remaining_width * remaining_height
-
-# 출력: 첫 번째 직사각형을 덮기 위한 최소 추가 직사각형 넓이
-print(min_rectangle_area)
+print(area)
