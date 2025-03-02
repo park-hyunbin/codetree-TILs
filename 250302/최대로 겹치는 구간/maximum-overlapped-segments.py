@@ -1,21 +1,24 @@
+OFFSET = 100
+MAX_R = 200
+
+# 변수 선언 및 입력
 n = int(input())
+segments = [
+    tuple(map(int, input().split()))
+    for _ in range(n)
+]
+checked = [0] * (MAX_R + 1)
 
-events = []  # (좌표, 변화량) 리스트
+for x1, x2 in segments:
+    # OFFSET을 더해줍니다.
+    x1, x2 = x1 + OFFSET, x2 + OFFSET
+    
+    # 구간을 칠해줍니다.
+    # 구간 단위로 진행하는 문제이므로
+    # x2에 등호가 들어가지 않음에 유의합니다.
+    for i in range(x1, x2):
+        checked[i] += 1
 
-for _ in range(n):
-    a, b = map(int, input().split())
-    events.append((a, 1))  # 선분이 시작하는 지점 +1
-    events.append((b, -1))  # 선분이 끝나는 지점 -1
-
-# 좌표 정렬 (같은 위치일 경우, 종료(-1)가 시작(+1)보다 먼저 처리되도록)
-events.sort()
-
-# 스위핑 진행
-current_overlap = 0
-max_overlap = 0
-
-for _, change in events:
-    current_overlap += change  # 현재 겹치는 선분 개수 변경
-    max_overlap = max(max_overlap, current_overlap)  # 최대 겹치는 개수 갱신
-
-print(max_overlap)
+# 최댓값을 구합니다.
+max_num = max(checked)
+print(max_num)
