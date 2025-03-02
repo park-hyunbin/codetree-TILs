@@ -1,17 +1,21 @@
 n = int(input())
 
-# 입력된 선분 정보를 리스트로 저장
-segments = [list(map(int, input().split())) for _ in range(n)]
+events = []  # (좌표, 변화량) 리스트
 
-# 선분의 최대 끝점 찾기 (배열 크기 설정)
-max_position = max(b for _, b in segments)
-blocks = [0] * (max_position + 1)
+for _ in range(n):
+    a, b = map(int, input().split())
+    events.append((a, 1))  # 선분이 시작하는 지점 +1
+    events.append((b, -1))  # 선분이 끝나는 지점 -1
 
-# 각 구간에 대해 겹치는 부분을 표시
-for a, b in segments:
-    for i in range(a, b):  # b를 포함하지 않는 구간
-        blocks[i] += 1
+# 좌표 정렬 (같은 위치일 경우, 종료(-1)가 시작(+1)보다 먼저 처리되도록)
+events.sort()
 
-# 최대 겹치는 선분 개수 찾기
-max_num = max(blocks)
-print(max_num)
+# 스위핑 진행
+current_overlap = 0
+max_overlap = 0
+
+for _, change in events:
+    current_overlap += change  # 현재 겹치는 선분 개수 변경
+    max_overlap = max(max_overlap, current_overlap)  # 최대 겹치는 개수 갱신
+
+print(max_overlap)
