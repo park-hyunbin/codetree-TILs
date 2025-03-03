@@ -5,7 +5,7 @@ numbers = [
     for _ in range(n)]  
 
 max_count = 1 
-current_count = 0
+current_count = 1
 current_count_1 = 0
 
 for i in range(1, n):
